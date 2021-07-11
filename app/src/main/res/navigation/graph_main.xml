@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/graph_main"
+    app:startDestination="@id/loadingFragment">
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.youtube.video_content_list.ListFragment"
+        android:label="ListFragment" />
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.example.youtube.video_content_list.LoadingFragment"
+        android:label="LoadingFragment" >
+        <action
+            android:id="@+id/action_loadingFragment_to_listFragment"
+            app:destination="@id/listFragment"
+            app:popUpTo="@id/graph_main"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_loadingFragment_to_errorFragment"
+            app:destination="@id/errorFragment"
+            app:popUpTo="@id/graph_main"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.example.youtube.video_content_list.ErrorFragment"
+        android:label="ErrorFragment" />
+</navigation>
