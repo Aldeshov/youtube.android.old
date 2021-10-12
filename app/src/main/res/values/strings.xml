@@ -30,4 +30,6 @@
     <string name="one_month_ago">1 month ago</string>
     <string name="x_years_ago">%1$d years ago</string>
     <string name="one_year_ago">1 year ago</string>
+    <string name="no_video_contents">No video contents</string>
+    <string name="icon">Icon</string>
 </resources>

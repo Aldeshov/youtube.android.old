@@ -1,19 +1,19 @@
 package com.example.youtube.database
 
 import androidx.room.*
-import com.example.youtube.database.models.User
+import com.example.youtube.database.models.LocalUser
 
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user WHERE id = 1")
-    fun getUser(): User
+    fun getUser(): LocalUser?
 
     @Insert
-    fun insert(vararg user: User)
+    fun insert(vararg localUser: LocalUser)
 
     @Delete
-    fun delete(user: User)
+    fun delete(localUser: LocalUser)
 
     @Update
-    fun update(user: User)
+    fun update(localUser: LocalUser)
 }
