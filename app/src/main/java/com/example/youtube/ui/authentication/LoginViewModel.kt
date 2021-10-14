@@ -4,8 +4,8 @@ import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.example.youtube.service.base.BaseViewModel
 import com.example.youtube.service.repositories.UserRepository
-import com.example.youtube.service.models.LiveDataInfo
-import com.example.youtube.service.models.LoginResponseInfo
+import com.example.youtube.service.models.LiveDataStatus
+import com.example.youtube.service.models.api.ResponseType
 
 
 class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel() {
@@ -14,43 +14,39 @@ class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel
 
     fun login() {
         if (loginDataValidate()) {
-            status.value = LiveDataInfo.LOADING
+            status.value = LiveDataStatus.LOADING
             email.value?.let {
                 password.value?.let { it1 ->
-                    userRepository.login(it, it1) { isSuccess, response ->
-                        if (isSuccess) {
-                            when (response) {
-                                LoginResponseInfo.LOGGED_IN -> {
-                                    status.value = LiveDataInfo.LOADED_SUCCESSFUL
-                                    message.value = "Successfully logged in"
-                                }
-                                LoginResponseInfo.INCORRECT_DATA -> {
-                                    status.value = LiveDataInfo.LOADED_EMPTY
-                                    message.value = "Incorrect user data"
-                                }
-                                LoginResponseInfo.UNSPECIFIED_RESPONSE -> {
-                                    status.value = LiveDataInfo.ERROR
-                                    message.value = "Unknown Error: Unspecified response"
-                                }
-                                LoginResponseInfo.SERVER_ERROR -> {
-                                    status.value = LiveDataInfo.ERROR
-                                    message.value = "Server Error: Server side errors"
-                                }
-                                LoginResponseInfo.UNKNOWN_ERROR -> {
-                                    status.value = LiveDataInfo.ERROR
-                                    message.value = "Unknown Error: Undefined Error"
-                                }
+                    userRepository.login(it, it1) { response, message ->
+                        when (response) {
+                            ResponseType.RESPONSE_SUCCESSFUL -> {
+                                status.value = LiveDataStatus.LOADED_SUCCESSFUL
                             }
-                        } else {
-                            status.value = LiveDataInfo.ERROR
-                            message.value = "Server not correct or problems with connection"
+                            ResponseType.RESPONSE_INCORRECT_DATA -> {
+                                status.value = LiveDataStatus.LOADED_EMPTY
+                            }
+                            ResponseType.RESPONSE_UNSPECIFIED -> {
+                                status.value = LiveDataStatus.ERROR
+                                this.message.value = message
+                            }
+                            ResponseType.RESPONSE_SERVER_ERROR -> {
+                                status.value = LiveDataStatus.ERROR
+                                this.message.value = message
+                            }
+                            ResponseType.RESPONSE_NULL -> {
+                                status.value = LiveDataStatus.ERROR
+                                this.message.value = message
+                            }
+                            ResponseType.UNKNOWN_ERROR -> {
+                                status.value = LiveDataStatus.ERROR
+                                this.message.value = message
+                            }
                         }
                     }
                 }
             }
         }
         else {
-            status.value = LiveDataInfo.LOADED_EMPTY
             message.value = "Not valid email address or password"
         }
     }

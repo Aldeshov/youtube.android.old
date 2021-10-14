@@ -1,11 +1,16 @@
 package com.example.youtube.service.repositories
 
-import com.example.youtube.service.models.LoginResponseInfo
-import com.example.youtube.service.models.UserResponseInfo
+import com.example.youtube.service.models.api.ResponseType
 
 
 interface UserRepository {
-    fun checkCurrentUser(onResult: (isSuccess: Boolean, response: UserResponseInfo?) -> Unit)
+    fun checkCurrentUser(
+        onResult: (response: ResponseType, message: String?) -> Unit
+    )
 
-    fun login(email: String, password: String, onResult: (isSuccess: Boolean, response: LoginResponseInfo?) -> Unit)
+    fun login(
+        email: String,
+        password: String,
+        onResult: (response: ResponseType, message: String?) -> Unit
+    )
 }

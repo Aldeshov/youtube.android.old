@@ -1,8 +1,8 @@
 package com.example.youtube.service
 
-import com.example.youtube.MainPresenter
+import com.example.youtube.BASE_URL
+import com.example.youtube.ui.MainViewModel
 import com.example.youtube.YouTube
-import com.example.youtube.configs.BASE_URL
 import com.example.youtube.database.Database
 import com.example.youtube.service.network.AuthInterceptor
 import com.example.youtube.service.repositories.ContentRepository
@@ -11,7 +11,7 @@ import com.example.youtube.service.repositories.UserRepository
 import com.example.youtube.service.repositories.UserRepositoryImpl
 import com.example.youtube.service.network.APIService
 import com.example.youtube.ui.authentication.LoginViewModel
-import com.example.youtube.ui.video_content_list.ListViewModel
+import com.example.youtube.ui.general.ListViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -31,8 +31,7 @@ val appModule = module {
     single<UserRepository> { UserRepositoryImpl(get(), get()) }
     single<ContentRepository> { ContentRepositoryImpl(get()) }
 
-    factory { MainPresenter(get()) }
-
+    viewModel { MainViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { ListViewModel(get()) }
 }

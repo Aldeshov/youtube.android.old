@@ -9,5 +9,5 @@
         android:id="@+id/loginFragment"
         android:name="com.example.youtube.ui.authentication.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/login"/>
+        tools:layout="@layout/fragment_login"/>
 </navigation>

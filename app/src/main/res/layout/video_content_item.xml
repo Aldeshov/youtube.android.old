@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
     <data>
 
@@ -9,15 +7,17 @@
 
         <variable
             name="item"
-            type="com.example.youtube.service.models.VideoContent" />
+            type="com.example.youtube.service.models.api.content.VideoContent" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/video_content"
-        tools:viewBindingIgnore="true"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        tools:viewBindingIgnore="true">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/preview_card"
@@ -83,11 +83,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:gravity="center_vertical"
-                    android:text="@{item.title}"
                     android:ellipsize="end"
-                    android:maxLines="2"
+                    android:gravity="center_vertical"
                     android:maxLength="32"
+                    android:maxLines="2"
+                    android:text="@{item.title}"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/bottom_side"
@@ -105,10 +105,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:gravity="center_vertical"
-                        android:text="@{item.on_channel.name}"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
                         android:maxLines="1"
+                        android:text="@{item.on_channel.name}"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"

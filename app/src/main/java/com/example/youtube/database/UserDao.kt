@@ -11,8 +11,8 @@ interface UserDao {
     @Insert
     fun insert(vararg localUser: LocalUser)
 
-    @Delete
-    fun delete(localUser: LocalUser)
+//    @Delete
+//    fun delete(localUser: LocalUser)
 
     @Update
     fun update(localUser: LocalUser)

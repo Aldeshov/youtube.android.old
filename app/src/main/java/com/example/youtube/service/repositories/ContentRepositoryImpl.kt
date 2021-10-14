@@ -1,7 +1,7 @@
 package com.example.youtube.service.repositories
 
+import com.example.youtube.service.models.api.content.VideoContent
 import com.example.youtube.service.network.APIService
-import com.example.youtube.service.models.VideoContent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,8 +12,10 @@ class ContentRepositoryImpl(
     override fun getVideoContents(onResult: (isSuccess: Boolean, response: ArrayList<VideoContent>?) -> Unit) {
         api.getVideoContents()
             .enqueue(object : Callback<ArrayList<VideoContent>> {
-                override fun onResponse(call: Call<ArrayList<VideoContent>>,
-                    response: Response<ArrayList<VideoContent>>?) {
+                override fun onResponse(
+                    call: Call<ArrayList<VideoContent>>,
+                    response: Response<ArrayList<VideoContent>>?
+                ) {
                     if (response != null && response.isSuccessful)
                         onResult(true, response.body()!!)
                     else
